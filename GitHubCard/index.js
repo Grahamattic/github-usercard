@@ -28,8 +28,6 @@
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
-
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
     Using DOM methods and properties, create and return the following markup:
@@ -51,10 +49,115 @@ const followersArray = [];
 */
 
 /*
-  List of LS Instructors Github username's:
+  List of LS Instructors Github usernames:
     tetondan
     dustinmyers
     justsml
     luishrd
     bigknell
 */
+
+    const followersArr = [
+      'tetondan',
+      'dustinmyers',
+      'justsml',
+      'luishrd',
+      'bigknell',
+    ];
+
+    // Grab div with "cards" class
+    let cards = document.querySelector(".cards");
+
+    // Make a new user card
+    function makeUserCard(userData) {
+
+        // Create card container div
+        let cardContainer = document.createElement("div");
+        // Add "card" class to card container div
+        cardContainer.classList.add("card");
+
+        // Create avatar image placeholder
+        let img = document.createElement("img");
+        // Fill in avatar image source
+        img.src = userData.avatar_url;
+
+        // Create card info div
+        let cardInfo = document.createElement("div");
+        cardInfo.classList.add("card-info");
+
+        // Create name h3 heading
+        let name = document.createElement("h3");
+        // Add "name" class to h3 heading
+        name.classList.add("name");
+        // Fill in user's name
+        name.textContent = userData.name;
+
+        // Create a username paragraph place holder
+        let userName = document.createElement("p");
+        // Add a username class to the userName paragraph
+        userName.classList.add("username");
+        // Fill in username text
+        userName.textContent = userData.login;
+
+        // Create user location paragraph tag
+        let location = document.createElement("p");
+        // Fill in user location text
+        location.textContent = `Location: ${userData.location}`;
+
+        // Create profile placeholder
+        let profile = document.createElement("p");
+        // Create profile anchor tag
+        let profileLink = document.createElement("a");
+
+        // Set profile link URL
+        profileLink.href = userData.html_url;
+        // Fill in profile link text
+        profileLink.textContent = userData.html_url;
+
+        // Fill in profile text
+        profile.textContent = "Profile: ";
+        // Append profile link to profile
+        profile.append(profileLink);
+
+        // Create followers paragraph placeholder
+        let followers = document.createElement("p");
+        // Cretae following paragraph placeholder
+        let following = document.createElement("p");
+
+        // Fill in followers and following data
+        followers.textContent = `Followers: ${userData.followers}`;
+        following.textContent = `Following: ${userData.following}`;
+
+        // Create bio paragraph placeholder
+        let bio = document.createElement("p");
+        // Fill in user bio text
+        bio.textContent = userData.bio;
+
+        // Create calendar div
+        let calendar = document.createElement("div");
+        // Style calendar div
+        calendar.setAttribute("style", "margin-top: 20px");
+
+        // Append new card info to a new card
+        cardInfo.append(
+            name,
+            userName,
+            location,
+            profile,
+            followers,
+            following,
+            bio,
+            calendar
+        );
+
+    // Append the new card to the card container
+    cardContainer.append(img, cardInfo);            
+
+    new GitHubCalendar(calendar, userData.login);
+
+    return cardContainer;
+}
+
+makeUserCard(Grahamattic);
+
+
